@@ -1,48 +1,46 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: '', password: '' };
-    this.loginUser = this.loginUser.bind(this);
-  }
+const LoginForm = (props) => {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = { username: '', password: '' };
+  //     this.loginUser = this.loginUser.bind(this);
+  //   }
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const navigate = useNavigate();
 
-  loginUser(event) {
+  const loginUser = (event) => {
     event.preventDefault();
-    const formData = this.state;
     fetch('/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        username: formData.username,
-        password: formData.password,
-      }),
+      body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) navigate('/trending');
+        if (data.success) navigate('/home');
       })
       .catch((err) => console.error(err));
-  }
+  };
 
-  render() {
-    return (
-      <Form className="container-lg" onSubmit={this.loginUser}>
+  return (
+    <>
+      <Form className="container-lg" onSubmit={loginUser}>
         <Form.Group className="mb-3" controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter username"
             onChange={(e) =>
-              this.setState({
+              setFormData({
                 username: e.target.value,
-                password: this.state.password,
+                password: formData.password,
               })
             }
           />
@@ -53,8 +51,8 @@ class LoginForm extends Component {
             type="password"
             placeholder="Enter password"
             onChange={(e) =>
-              this.setState({
-                username: this.state.username,
+              setFormData({
+                username: formData.username,
                 password: e.target.value,
               })
             }
@@ -64,8 +62,11 @@ class LoginForm extends Component {
           Login
         </Button>
       </Form>
-    );
-  }
-}
+      <Button variant="secondary" onClick={() => navigate('/signup')}>
+        Register an Account
+      </Button>
+    </>
+  );
+};
 
 export default LoginForm;

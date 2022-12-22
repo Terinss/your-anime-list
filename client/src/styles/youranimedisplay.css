@@ -1,0 +1,15 @@
+.your-anime-display {
+}
+
+.your-anime-display-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.your-anime-display-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

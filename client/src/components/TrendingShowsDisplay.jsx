@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TrendingShow from './TrendingShow';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/trendingshowsdisplay.css';
 
 class TrendingShowsDisplay extends Component {
   constructor() {
@@ -20,21 +20,23 @@ class TrendingShowsDisplay extends Component {
   render() {
     console.log(this.state);
     const shows = [];
-    this.state.anime.forEach((anime) => {
+    this.state.anime.forEach((anime, index) => {
       shows.push(
-        <Carousel.Item>
+        <Carousel.Item key={`CarouselItem${index}`}>
           <img className="d-block w-100" alt="Slide" src={anime.coverImage} />
-          <Carousel.Caption>
-            <h3>{anime.title}</h3>
-            {/* <img src={posterImage} /> */}
-          </Carousel.Caption>
+          <div id="caption">
+            <Carousel.Caption>
+              <h3>{anime.title}</h3>
+              {/* <img src={posterImage} /> */}
+            </Carousel.Caption>
+          </div>
         </Carousel.Item>
       );
     });
     return (
-      <div className="container-lg text-center">
+      <div className="container-lg text-center my-5">
         <h1>Trending shows</h1>
-        <Carousel fade variant="dark">
+        <Carousel slide={true} variant="dark">
           {shows}
         </Carousel>
       </div>

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const users = require('./routes/users.js');
 const anime = require('./routes/anime.js');
 const app = express();
@@ -8,7 +9,10 @@ const PORT = 1234;
 const mongoURI = 'mongodb://localhost/soloprojectdev';
 mongoose.connect(mongoURI);
 
+// Routers to parse incoming requests
 app.use(express.json());
+app.use(express.urlencoded());
+app.use(cookieParser());
 
 // Test router
 app.use('/api/users', users);
