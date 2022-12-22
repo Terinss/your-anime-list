@@ -11,6 +11,15 @@ const YourAnime = (props) => {
     });
   };
 
+  const deleteAnime = () => {
+    const url = `/api/anime/deleteuseranime?dbid=${props.dbid}`;
+    fetch(url);
+    console.log('1', props.showsList);
+    props.showsList.splice(props.index, 1);
+    console.log('2', props.showsList);
+    props.setShowsList(props.showsList);
+  };
+
   return (
     <Card className="your-anime">
       <Card.Img src={props.image} />
@@ -40,6 +49,10 @@ const YourAnime = (props) => {
           </Button>
         </div>
         <Button onClick={saveEpisodes}>Save</Button>
+        <br />
+        <Button variant="danger" onClick={deleteAnime}>
+          Remove Anime
+        </Button>
       </Card.Body>
     </Card>
   );

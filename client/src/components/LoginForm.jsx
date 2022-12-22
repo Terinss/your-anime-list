@@ -3,15 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+// import { useAuth } from './Auth';
 
 const LoginForm = (props) => {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = { username: '', password: '' };
-  //     this.loginUser = this.loginUser.bind(this);
-  //   }
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate();
+  // const auth = useAuth();
 
   const loginUser = (event) => {
     event.preventDefault();
@@ -24,7 +21,10 @@ const LoginForm = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) navigate('/home');
+        if (data.success) {
+          props.setUser(formData.username);
+          navigate('/home');
+        }
       })
       .catch((err) => console.error(err));
   };

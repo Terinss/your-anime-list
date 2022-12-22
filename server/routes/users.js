@@ -25,9 +25,17 @@ router.post(
   sessionController.startSession,
   cookieController.setSSIDcookie,
   (req, res, next) => {
-    res.status(200).json({ success: true, redirect: '/trending' });
+    res.status(200).json({ success: true });
   }
 );
+
+router.get('/isloggedin', sessionController.isLoggedIn, (req, res, next) => {
+  res.status(200).json({ isLoggedIn: res.locals.isLoggedIn });
+});
+
+router.get('/logout', sessionController.logout, (req, res, next) => {
+  res.status(200).json({ message: 'Successfully logged out' });
+});
 
 router.post('/signup', userController.createUser, (req, res, next) => {
   res.status(200).send('User created');

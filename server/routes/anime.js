@@ -20,6 +20,14 @@ router.post('/adduseranime', animeController.addUserAnime, (req, res, next) => {
   res.status(200).send('adding anime to your list');
 });
 
+router.get(
+  '/deleteuseranime',
+  animeController.deleteUserAnime,
+  (req, res, next) => {
+    res.status(200).send('deleted anime from your list');
+  }
+);
+
 router.post(
   '/update',
   animeController.updateEpisodesWatched,

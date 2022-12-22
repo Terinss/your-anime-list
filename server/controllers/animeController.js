@@ -17,16 +17,20 @@ const options = {
 
 animeController.updateEpisodesWatched = (req, res, next) => {
   const { dbid, episodes } = req.query;
-  // let oldWatched;
-  // User.findOne(
-  //   { id: req.cookies.SSID },
-  //   (err, user) => (oldWatched = user.watchingAnime)
-  // );
-  console.log(dbid, episodes);
-  console.log('in episodes', req.query);
   User.findOneAndUpdate(
     { _id: req.cookies.SSID, 'watchingAnime.dbid': dbid },
     { $set: { 'watchingAnime.$.episodesWatched': episodes } },
+    { new: true },
+    (err, user) => user
+  );
+};
+
+animeController.deleteUserAnime = (req, res, next) => {
+  const { dbid } = req.query;
+  console.log(dbid);
+  User.findOneAndUpdate(
+    { _id: req.cookies.SSID },
+    { $pull: { watchingAnime: { dbid: dbid } } },
     { new: true },
     (err, user) => console.log(user)
   );
@@ -40,20 +44,9 @@ animeController.addUserAnime = (req, res, next) => {
     { $addToSet: { watchingAnime: [{ dbid }] } },
     { new: true },
     (err, user) => {
-      console.log(user);
+      user;
     }
   );
-  // fetch(url, options)
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     const fields = data.data[0].attributes;
-  //     Anime.create(
-  //       { title: fields.titles.en, episodeCount: fields.episodeCount, dbid },
-  //       (err, anime) => {
-  //         console.log('New anime created', anime);
-  //       }
-  //     );
-  //   });
 };
 
 animeController.searchAnime = (req, res, next) => {
@@ -93,12 +86,16 @@ animeController.searchAnime = (req, res, next) => {
 
 animeController.getUserShows = (req, res, next) => {
   const userShows = [];
+  if (!req.cookies.SSID) {
+    res.locals.userShows = [];
+    return next();
+  }
   User.findOne({ _id: req.cookies.SSID }).then((user) => {
     const userShowIds = [];
     user.watchingAnime.forEach((ele) => userShowIds.push(ele.dbid));
     const userShowsPromises = [];
-    console.log(user);
-    console.log(userShowIds);
+    // console.log(user);
+    // console.log(userShowIds);
     const idFilterObj = {};
     userShowIds.forEach((id) => {
       const url = `https://kitsu.io/api/edge/anime?filter[id]=${id}`;
@@ -118,17 +115,17 @@ animeController.getUserShows = (req, res, next) => {
           });
         });
         res.locals.userShows = userShows;
-        console.log(res.locals.userShows);
+        // console.log(res.locals.userShows);
         return next();
       });
   });
 };
 
 animeController.getTrendingAnime = (req, res, next) => {
-  console.log('in get trending anime');
+  // console.log('in get trending anime');
   const url = 'https://kitsu.io/api/edge/trending/anime?page[20]';
   const animeInfo = [];
-  console.log('about to fetch trending anime');
+  // console.log('about to fetch trending anime');
   fetch(url, options)
     .then((response) => response.json())
     .then((parsedInfo) => {

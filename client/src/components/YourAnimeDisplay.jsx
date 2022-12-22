@@ -10,6 +10,7 @@ const YourAnimeDisplay = (props) => {
   const yourAnimeList = [];
 
   useEffect(() => {
+    console.log('using effect');
     const url = '/api/anime/yourshows';
     fetch(url)
       .then((res) => res.json())
@@ -19,7 +20,7 @@ const YourAnimeDisplay = (props) => {
           console.log(data);
         }
       });
-  }, []);
+  });
 
   showsList.forEach((show, index) => {
     yourAnimeList.push(
@@ -28,7 +29,7 @@ const YourAnimeDisplay = (props) => {
         title={show.title}
         image={show.image}
         episodesWatched={show.episodesWatched}
-        showsList={showsList}
+        showsList={[...showsList]}
         setShowsList={setShowsList}
         index={index}
       ></YourAnime>
