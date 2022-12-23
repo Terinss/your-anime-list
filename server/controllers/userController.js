@@ -22,6 +22,7 @@ userController.verifyUser = (req, res, next) => {
 };
 
 userController.createUser = (req, res, next) => {
+  console.log(req.body);
   User.create(req.body)
     .then((user) => {
       console.log(`User ${user.username} created.`);

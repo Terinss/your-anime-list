@@ -2,11 +2,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import { useNavigate } from 'react-router-dom';
 import '../styles/nav.css';
 
 const Navigation = (props) => {
+  const navigate = useNavigate();
   const logout = () => {
     fetch('/api/users/logout');
+    navigate('/');
   };
 
   return (

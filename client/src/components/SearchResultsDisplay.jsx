@@ -14,9 +14,9 @@ const SearchResultsDisplay = (props) => {
     'coverImage',
   ];
   props.searchResults.animeList.forEach((anime, index) => {
-    for (const prop of expectedProps) {
-      if (!anime[prop]) willPush = false;
-    }
+    // for (const prop of expectedProps) {
+    if (!anime['image']) willPush = false;
+    // }
     if (willPush) {
       resultsList.push(
         <SearchResult
@@ -34,6 +34,7 @@ const SearchResultsDisplay = (props) => {
     }
     willPush = true;
   });
+  console.log(resultsList);
   return <div>{resultsList}</div>;
 };
 

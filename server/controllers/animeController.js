@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express');
 const Anime = require('../models/animeModel');
 const User = require('../models/userModel');
@@ -50,8 +51,12 @@ animeController.addUserAnime = (req, res, next) => {
 };
 
 animeController.searchAnime = (req, res, next) => {
-  let { filter } = req.query;
-  filterParam = filter.replaceAll(' ', '+');
+  console.log(req.query);
+  console.log(req.query.page, typeof req.query.page);
+
+  let filter = req.query.filter;
+  if (filter) filterParam = filter.replaceAll(' ', '+');
+
   const expectedProps = [
     'title',
     'image',
@@ -60,8 +65,10 @@ animeController.searchAnime = (req, res, next) => {
     'episodeCount',
     'coverImage',
   ];
-  let toPush = true;
-  const url = `https://kitsu.io/api/edge/anime?page[limit]=20&filter[text]=${filterParam}`;
+  const url = req.query.page
+    ? `https://kitsu.io/api/edge/anime?page[limit]=${req.query.page.limit}&page[offset]=${req.query.page.offset}&filter[text]=${filterParam}`
+    : `https://kitsu.io/api/edge/anime?page[limit]=20&filter[text]=${filterParam}`;
+
   fetch(url, options)
     .then((res) => res.json())
     .then((data) => {
@@ -70,7 +77,7 @@ animeController.searchAnime = (req, res, next) => {
         const fields = anime.attributes;
         filteredData.animeList.push({
           id: anime.id,
-          title: fields.titles.en,
+          title: fields.canonicalTitle,
           image: fields.posterImage.original,
           coverImage: fields.coverImage ? fields.coverImage.large : null,
           synopsis: fields.synopsis,
@@ -94,8 +101,6 @@ animeController.getUserShows = (req, res, next) => {
     const userShowIds = [];
     user.watchingAnime.forEach((ele) => userShowIds.push(ele.dbid));
     const userShowsPromises = [];
-    // console.log(user);
-    // console.log(userShowIds);
     const idFilterObj = {};
     userShowIds.forEach((id) => {
       const url = `https://kitsu.io/api/edge/anime?filter[id]=${id}`;
@@ -109,23 +114,21 @@ animeController.getUserShows = (req, res, next) => {
           const attributes = obj.data[0].attributes;
           userShows.push({
             dbid: user.watchingAnime[index].dbid,
-            title: attributes.titles.en,
+            title: attributes.canonicalTitle,
             image: attributes.posterImage.medium,
+            episodeCount: attributes.episodeCount,
             episodesWatched: user.watchingAnime[index].episodesWatched,
           });
         });
         res.locals.userShows = userShows;
-        // console.log(res.locals.userShows);
         return next();
       });
   });
 };
 
 animeController.getTrendingAnime = (req, res, next) => {
-  // console.log('in get trending anime');
   const url = 'https://kitsu.io/api/edge/trending/anime?page[20]';
   const animeInfo = [];
-  // console.log('about to fetch trending anime');
   fetch(url, options)
     .then((response) => response.json())
     .then((parsedInfo) => {
@@ -151,23 +154,3 @@ animeController.getTrendingAnime = (req, res, next) => {
 };
 
 module.exports = animeController;
-
-// fetch(url, options)
-//         .then((response) => response.json())
-//         .then((data) => {
-//           data.data.forEach((show) => {
-//             userShows.push({
-//               title: show.attributes.titles.en,
-//               image: show.attributes.posterImage.medium,
-//             });
-//           });
-//           res.locals.userShows = userShows;
-//           return next();
-//         })
-//         .catch((err) =>
-//           next({
-//             log: `Error in animeController.getUserShows ${err}`,
-//             status: 500,
-//             message: { err: err },
-//           })
-//         );

@@ -11,7 +11,21 @@
 .result-card {
   display: flex;
   justify-content: space-between;
+  min-height: 200px;
 }
 /* .result-card button {
   justify-self: flex-end;
 } */
+
+#buttons-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#buttons-div Button {
+  margin: 10px;
+}

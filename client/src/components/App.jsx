@@ -18,26 +18,28 @@ const App = () => {
   return (
     <AuthContext.Provider value={user}>
       <Navigation logout={() => setUser(null)} />
-      <Routes>
-        <Route path="/" element={<LoginForm setUser={setUser} />} />
-        <Route path="/signup" element={<SignupForm />} />
-        <Route
-          path="/home"
-          element={
-            <RequireAuth user={user}>
-              <Home />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <RequireAuth user={user}>
-              <SeachPage />
-            </RequireAuth>
-          }
-        />
-      </Routes>
+      <div className="container my-5">
+        <Routes>
+          <Route path="/" element={<LoginForm setUser={setUser} />} />
+          <Route path="/signup" element={<SignupForm />} />
+          <Route
+            path="/home"
+            element={
+              <RequireAuth user={user}>
+                <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <RequireAuth user={user}>
+                <SeachPage />
+              </RequireAuth>
+            }
+          />
+        </Routes>
+      </div>
     </AuthContext.Provider>
   );
 };

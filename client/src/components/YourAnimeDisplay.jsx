@@ -29,6 +29,7 @@ const YourAnimeDisplay = (props) => {
         title={show.title}
         image={show.image}
         episodesWatched={show.episodesWatched}
+        episodeCount={show.episodeCount}
         showsList={[...showsList]}
         setShowsList={setShowsList}
         index={index}

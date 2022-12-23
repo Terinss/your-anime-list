@@ -25,14 +25,19 @@ const YourAnime = (props) => {
       <Card.Img src={props.image} />
       <Card.Body>
         <Card.Title className="your-anime-title">{props.title}</Card.Title>
-        <Card.Text>Episodes Watched: {props.episodesWatched}</Card.Text>
+        <Card.Text>
+          Episodes Watched: {props.episodesWatched} / {props.episodeCount}
+        </Card.Text>
         <div className="my-2 buttons">
           <Button
             variant="danger"
             onClick={() => {
               const newList = [...props.showsList];
-              newList[props.index].episodesWatched--;
-              props.setShowsList(newList);
+              const current = newList[props.index];
+              if (current.episodesWatched > 0) {
+                current.episodesWatched--;
+                props.setShowsList(newList);
+              }
             }}
           >
             -
@@ -41,8 +46,11 @@ const YourAnime = (props) => {
             variant="success"
             onClick={() => {
               const newList = [...props.showsList];
-              newList[props.index].episodesWatched++;
-              props.setShowsList(newList);
+              const current = newList[props.index];
+              if (current.episodesWatched < props.episodeCount) {
+                current.episodesWatched++;
+                props.setShowsList(newList);
+              }
             }}
           >
             +
