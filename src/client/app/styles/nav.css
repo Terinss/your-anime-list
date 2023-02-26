@@ -1,0 +1,27 @@
+Nav {
+  background-color: rgba(245, 245, 245, 0.1);
+  height: 100px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-logo{
+  font-size: 2em;
+  color: wheat;
+}
+
+.nav-link {
+  font-size: 1.5em;
+  color: wheat;
+}
+
+.nav-buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+}

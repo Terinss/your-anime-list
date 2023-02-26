@@ -1,0 +1,20 @@
+.signup-form{
+  width: 80%;
+  color: black;
+  height: fit-content;
+  max-width: 500px;
+  padding: 75px;
+  margin: auto auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 100px 0 rgba(255, 255, 255, 0.5);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.signup-form h1{
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,17 @@
+body{
+  height: 100vh;
+}
+
+
+#root {
+  height: 100%;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin: 0;
+}
+
+#root,
+html {
+  background-color: #202124;
+  color: #bdc1c6;
+}
