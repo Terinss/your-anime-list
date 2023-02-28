@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../hooks';
 
 const ProtectedRoute = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
   console.log(
     'In ProtectedRoute, user is: ',
     user,

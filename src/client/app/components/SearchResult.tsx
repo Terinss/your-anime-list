@@ -2,15 +2,20 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import Fade from 'react-bootstrap/Fade';
 import { useState } from 'react';
+import type { Anime } from './SearchPage';
 import '../styles/searchresult.css';
 
-const SearchResult = (props) => {
+export interface SearchResultType extends Anime {
+  key: string;
+  dbid: string;
+}
+
+const SearchResult: React.FC<SearchResultType> = (props) => {
   const [alertStatus, setAlertStatus] = useState(false);
   const deleteSelf = () => {
     const self = document.getElementById(props.id);
-    self.remove();
+    self?.remove();
   };
 
   const addAnimeToList = () => {

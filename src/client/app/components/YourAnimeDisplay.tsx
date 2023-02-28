@@ -3,11 +3,16 @@ import Button from 'react-bootstrap/Button';
 import YourAnime from './YourAnime';
 import '../styles/youranimedisplay.css';
 import { useNavigate } from 'react-router-dom';
+import { SearchResultType } from './SearchResult';
 
-const YourAnimeDisplay = (props) => {
-  const [showsList, setShowsList] = useState([]);
+export interface UserAnime extends SearchResultType {
+  episodesWatched: number;
+}
+
+const YourAnimeDisplay = () => {
+  const [showsList, setShowsList] = useState<UserAnime[]>([]);
   const navigate = useNavigate();
-  const yourAnimeList = [];
+  const yourAnimeList: JSX.Element[] = [];
 
   useEffect(() => {
     const url = '/api/anime/yourshows';

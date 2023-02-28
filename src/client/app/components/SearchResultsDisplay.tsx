@@ -1,9 +1,15 @@
 import React from 'react';
 import SearchResult from './SearchResult';
+import type { SearchResults } from './SearchPage';
 
-const SearchResultsDisplay = (props) => {
-  const resultsList = [];
-  console.log('SearchResultsDisplay', props);
+interface SearchResultsDisplayProps {
+  searchResults: SearchResults;
+}
+
+const SearchResultsDisplay: React.FC<SearchResultsDisplayProps> = ({
+  searchResults,
+}) => {
+  const resultsList: JSX.Element[] = [];
   let willPush = true;
   const expectedProps = [
     'title',
@@ -13,7 +19,7 @@ const SearchResultsDisplay = (props) => {
     'episodeCount',
     'coverImage',
   ];
-  props.searchResults.animeList.forEach((anime, index) => {
+  searchResults.animeList.forEach((anime, index) => {
     // for (const prop of expectedProps) {
     if (!anime['image']) willPush = false;
     // }
@@ -26,9 +32,9 @@ const SearchResultsDisplay = (props) => {
           status={anime.status}
           episodeCount={anime.episodeCount}
           coverImage={anime.coverImage}
-          dbid={anime.id}
+          id={anime.id}
           key={`SearchResult${index}`}
-          id={`SearchResult${index}`}
+          dbid={`SearchResult${index}`}
         />
       );
     }

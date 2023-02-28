@@ -5,11 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import '../styles/signupform.css';
 
-const SignupForm = (props) => {
+const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate();
 
-  const createUser = (event) => {
+  const createUser = (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
       fetch('/api/users/signup', {

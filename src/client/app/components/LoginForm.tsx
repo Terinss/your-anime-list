@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, FormEvent } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { userSlice } from '../store/user';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,18 +8,15 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/loginform.css';
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state?.user);
 
   const { login } = userSlice.actions;
 
-  console.log('In LoginForm, user is: ', user);
-
   useEffect(() => {
-    console.log('In LoginForm, useEffect');
     fetch('/api/users/auth', {
       method: 'GET',
       headers: {
@@ -37,7 +34,7 @@ const LoginForm = () => {
       });
   }, []);
 
-  const loginUser = (event) => {
+  const loginUser = (event: FormEvent) => {
     event.preventDefault();
     fetch('/api/users/login', {
       method: 'POST',

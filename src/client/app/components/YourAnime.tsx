@@ -1,9 +1,21 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import type { UserAnime } from './YourAnimeDisplay';
 import '../styles/youranime.css';
 
-const YourAnime = (props) => {
+interface YourAnimeProps {
+  dbid: string;
+  title: string;
+  image: string;
+  episodeCount: number;
+  index: number;
+  episodesWatched: number;
+  showsList: UserAnime[];
+  setShowsList: React.Dispatch<React.SetStateAction<UserAnime[]>>;
+}
+
+const YourAnime: React.FC<YourAnimeProps> = (props) => {
   const saveEpisodes = () => {
     const url = `/api/anime/update?dbid=${props.dbid}&episodes=${props.episodesWatched}`;
     fetch(url, {
@@ -14,9 +26,7 @@ const YourAnime = (props) => {
   const deleteAnime = () => {
     const url = `/api/anime/deleteuseranime?dbid=${props.dbid}`;
     fetch(url);
-    console.log('1', props.showsList);
     props.showsList.splice(props.index, 1);
-    console.log('2', props.showsList);
     props.setShowsList(props.showsList);
   };
 
@@ -67,10 +77,3 @@ const YourAnime = (props) => {
 };
 
 export default YourAnime;
-
-{
-  /* <div class="yourAnime">
-      <h4 className="your-anime-title">{props.title}</h4>
-      <img src={props.image} />
-    </div> */
-}

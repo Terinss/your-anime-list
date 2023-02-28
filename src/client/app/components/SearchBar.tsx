@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { SearchResults } from './SearchPage';
 
-const SearchBar = (props) => {
+interface SearchBarProps {
+  setSearchResults: React.Dispatch<React.SetStateAction<SearchResults>>;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchResults }) => {
   const [formData, setFormData] = useState('');
 
-  const searchAnime = (event) => {
+  const searchAnime = (event: React.SyntheticEvent) => {
     event.preventDefault();
     const parsedText = formData.replaceAll(' ', '+');
     fetch(`/api/anime/search/?filter=${parsedText}`)
       .then((res) => res.json())
-      .then((results) => props.setSearchResults(results));
+      .then((results) => setSearchResults(results));
   };
 
   return (

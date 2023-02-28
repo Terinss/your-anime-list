@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
 import '../styles/nav.css';
 
-const Navigation = (props) => {
+const Navigation = () => {
   const navigate = useNavigate();
   const logout = () => {
     fetch('/api/users/logout');
