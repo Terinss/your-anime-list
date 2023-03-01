@@ -62,6 +62,7 @@ const LoginForm: React.FC = () => {
       <Form.Group className="mb-3" controlId="formBasicUsername">
         <Form.Label>Username</Form.Label>
         <Form.Control
+          data-testid="login-username"
           type="text"
           placeholder="Enter username"
           onChange={(e) =>
@@ -75,6 +76,7 @@ const LoginForm: React.FC = () => {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
+          data-testid="login-password"
           type="password"
           placeholder="Enter password"
           onChange={(e) =>
@@ -86,10 +88,11 @@ const LoginForm: React.FC = () => {
         />
       </Form.Group>
       <div className="button-container">
-        <Button variant="success" type="submit">
+        <Button data-testid="login-button" variant="success" type="submit">
           Login
         </Button>
         <Button
+          data-testid="login-register-button"
           variant="primary"
           onClick={() => {
             console.log('clicked');

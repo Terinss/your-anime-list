@@ -33,9 +33,10 @@ const SignupForm: React.FC = () => {
   return (
     <Form className="container-lg signup-form" onSubmit={createUser}>
       <h1>Sign Up</h1>
-      <Form.Group className="mb-3" controlId="formBasicUsername">
+      <Form.Group className="mb-3" controlId="formBasicusername">
         <Form.Label>Username</Form.Label>
         <Form.Control
+          data-testid="username"
           type="text"
           placeholder="Enter username"
           onChange={(e) =>
@@ -49,6 +50,7 @@ const SignupForm: React.FC = () => {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
+          data-testid="password"
           type="password"
           placeholder="Enter password"
           onChange={(e) =>
@@ -59,7 +61,7 @@ const SignupForm: React.FC = () => {
           }
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" data-testid="register">
         Register Account
       </Button>
     </Form>
