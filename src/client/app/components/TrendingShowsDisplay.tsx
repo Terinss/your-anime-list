@@ -10,13 +10,14 @@ const TrendingShowsDisplay = () => {
   useEffect(() => {
     fetch('/api/anime/trending')
       .then((res) => res.json())
-      .then(({ data }) => {
+      .then((data) => {
         setAnime(data);
       });
   }, []);
 
   const shows: JSX.Element[] = [];
 
+  console.log('Trending Anime: ', anime);
   if (Array.isArray(anime)) {
     anime.forEach((anime, index) => {
       shows.push(

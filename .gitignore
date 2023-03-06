@@ -3,3 +3,4 @@ node_modules
 nginx.conf
 dockerfile
 dist
+.DS_Store
