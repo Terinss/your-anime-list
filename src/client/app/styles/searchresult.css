@@ -13,9 +13,6 @@
   justify-content: space-between;
   min-height: 200px;
 }
-/* .result-card button {
-  justify-self: flex-end;
-} */
 
 #buttons-div {
   display: flex;
