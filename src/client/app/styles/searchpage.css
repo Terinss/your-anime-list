@@ -1,0 +1,14 @@
+.search-area{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+#buttons-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}

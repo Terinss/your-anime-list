@@ -1,8 +1,8 @@
-import React, { useState, useEffect, EventHandler } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import SearchResultsDisplay from './SearchResultsDisplay';
 import Button from 'react-bootstrap/Button';
-import '../styles/searchresult.css';
+import '../styles/searchpage.css';
 
 export interface Anime {
   id: string;
@@ -39,7 +39,7 @@ const SeachPage = () => {
   };
 
   return (
-    <div>
+    <div className="search-area">
       <SearchBar setSearchResults={setSearchResults} />
       <div id="buttons-div">
         <Button onClick={(e) => changePage(searchResults.pages.first, e)}>

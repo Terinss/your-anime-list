@@ -61,9 +61,19 @@ const SignupForm: React.FC = () => {
           }
         />
       </Form.Group>
-      <Button variant="primary" type="submit" data-testid="register">
-        Register Account
-      </Button>
+      <div className="button-container">
+        <Button variant="primary" type="submit" data-testid="register">
+          Register Account
+        </Button>
+        <Button
+          variant="secondary"
+          type="button"
+          data-testid="back-to-login"
+          onClick={() => navigate('/login')}
+        >
+          Back to Login
+        </Button>
+      </div>
     </Form>
   );
 };

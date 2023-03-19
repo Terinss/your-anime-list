@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useAppSelector } from '../hooks';
 
 const ProtectedRoute = () => {
