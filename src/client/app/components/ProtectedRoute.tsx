@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useAppSelector } from '../hooks';
 import { useAppDispatch } from '../hooks';
 import { userSlice } from '../store/user';
+import Loader from './Loader';
 
 const ProtectedRoute = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -20,13 +21,7 @@ const ProtectedRoute = () => {
     verifyUser();
   }, []);
 
-  return loading ? (
-    <h1>Loading...</h1>
-  ) : !user ? (
-    <Navigate to="/" />
-  ) : (
-    <Outlet />
-  );
+  return loading ? <Loader /> : !user ? <Navigate to="/" /> : <Outlet />;
 };
 
 export default ProtectedRoute;
