@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import SignupForm from './SignupForm';
-import LoginForm from './LoginForm';
-import Home from './Home';
-import SeachPage from './SearchPage';
+import SignupForm from '../Pages/SignupForm';
+import LoginForm from '../Pages/LoginForm';
+import Home from '../Pages/Home';
+import SeachPage from '../Pages/SearchPage';
 import Navigation from './Navigation';
 import ProtectedRoute from './ProtectedRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import type { Anime } from './SearchPage';
+import type { Anime } from '../Pages/SearchPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/trendingshowsdisplay.css';
 

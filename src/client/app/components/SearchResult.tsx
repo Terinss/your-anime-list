@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { useState } from 'react';
-import type { Anime } from './SearchPage';
+import type { Anime } from '../Pages/SearchPage';
 import '../styles/searchresult.css';
 
 export interface SearchResultType extends Anime {

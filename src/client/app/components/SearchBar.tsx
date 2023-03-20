@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { SearchResults } from './SearchPage';
+import { SearchResults } from '../Pages/SearchPage';
 
 interface SearchBarProps {
   setSearchResults: React.Dispatch<React.SetStateAction<SearchResults>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setSearchResults }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  setSearchResults,
+  setLoading,
+}) => {
   const [formData, setFormData] = useState('');
 
   const searchAnime = (event: React.SyntheticEvent) => {
     event.preventDefault();
+    setLoading(true);
     const parsedText = formData.replaceAll(' ', '+');
     fetch(`/api/anime/search/?filter=${parsedText}`)
       .then((res) => res.json())
-      .then((results) => setSearchResults(results));
+      .then((results) => {
+        setLoading(false);
+        setSearchResults(results);
+      });
   };
 
   return (

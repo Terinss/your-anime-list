@@ -1,24 +1,19 @@
 import React from 'react';
 import SearchResult from './SearchResult';
-import type { SearchResults } from './SearchPage';
+import Loader from './Loader';
+import type { SearchResults } from '../Pages/SearchPage';
 
 interface SearchResultsDisplayProps {
   searchResults: SearchResults;
+  loading: boolean;
 }
 
 const SearchResultsDisplay: React.FC<SearchResultsDisplayProps> = ({
   searchResults,
+  loading,
 }) => {
   const resultsList: JSX.Element[] = [];
   let willPush = true;
-  const expectedProps = [
-    'title',
-    'image',
-    'synopsis',
-    'status',
-    'episodeCount',
-    'coverImage',
-  ];
   searchResults.animeList.forEach((anime, index) => {
     // for (const prop of expectedProps) {
     if (!anime['image']) willPush = false;
@@ -40,8 +35,7 @@ const SearchResultsDisplay: React.FC<SearchResultsDisplayProps> = ({
     }
     willPush = true;
   });
-  console.log(resultsList);
-  return <div>{resultsList}</div>;
+  return loading ? <Loader /> : <div>{resultsList}</div>;
 };
 
 export default SearchResultsDisplay;
