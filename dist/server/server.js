@@ -23,6 +23,10 @@ mongoose_1.default
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded());
 app.use((0, cookie_parser_1.default)());
+// Health check
+app.use('/health', (req, res) => {
+    res.sendStatus(200);
+});
 // Test router
 app.use('/api/users', users_routes_1.default);
 // Test anilist api

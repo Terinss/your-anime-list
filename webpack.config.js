@@ -17,7 +17,7 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:8080',
-        router: () => 'http://localhost:1234',
+        router: () => 'http://api.terrence.io',
       },
     },
   },

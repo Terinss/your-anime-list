@@ -28,6 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
 
+// Health check
+app.use('/health', (req: Request, res: Response) => {
+  res.sendStatus(200);
+} )
+
 // Test router
 app.use('/api/users', users);
 
