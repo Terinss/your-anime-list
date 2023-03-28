@@ -12,7 +12,7 @@ const SignupForm: React.FC = () => {
   const createUser = (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      fetch('/api/users/signup', {
+      fetch('http://api.terrence.io/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

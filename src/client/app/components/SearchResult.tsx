@@ -19,7 +19,7 @@ const SearchResult: React.FC<SearchResultType> = (props) => {
   };
 
   const addAnimeToList = () => {
-    const url = `/api/anime/adduseranime?dbid=${props.dbid}`;
+    const url = `http://api.terrence.io/api/anime/adduseranime?dbid=${props.dbid}`;
     setAlertStatus(true);
     setTimeout(setAlertStatus, 1000, false);
     fetch(url, { method: 'POST' });

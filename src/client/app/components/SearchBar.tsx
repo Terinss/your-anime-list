@@ -18,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     event.preventDefault();
     setLoading(true);
     const parsedText = formData.replaceAll(' ', '+');
-    fetch(`/api/anime/search/?filter=${parsedText}`)
+    fetch(`http://api.terrence.io/api/anime/search/?filter=${parsedText}`)
       .then((res) => res.json())
       .then((results) => {
         setLoading(false);

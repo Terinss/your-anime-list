@@ -8,7 +8,7 @@ const TrendingShowsDisplay = () => {
   const [anime, setAnime] = useState<Anime[]>([]);
 
   useEffect(() => {
-    fetch('/api/anime/trending')
+    fetch('http://api.terrence.io/api/anime/trending')
       .then((res) => res.json())
       .then((data) => {
         setAnime(data);

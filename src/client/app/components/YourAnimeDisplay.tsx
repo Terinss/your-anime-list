@@ -15,7 +15,7 @@ const YourAnimeDisplay = () => {
   const yourAnimeList: JSX.Element[] = [];
 
   useEffect(() => {
-    const url = '/api/anime/yourshows';
+    const url = 'http://api.terrence.io/api/anime/yourshows';
     fetch(url)
       .then((res) => res.json())
       .then((data) => {

@@ -17,14 +17,14 @@ interface YourAnimeProps {
 
 const YourAnime: React.FC<YourAnimeProps> = (props) => {
   const saveEpisodes = () => {
-    const url = `/api/anime/update?dbid=${props.dbid}&episodes=${props.episodesWatched}`;
+    const url = `http://api.terrence.io/api/anime/update?dbid=${props.dbid}&episodes=${props.episodesWatched}`;
     fetch(url, {
       method: 'POST',
     });
   };
 
   const deleteAnime = () => {
-    const url = `/api/anime/deleteuseranime?dbid=${props.dbid}`;
+    const url = `http://api.terrence.io/api/anime/deleteuseranime?dbid=${props.dbid}`;
     fetch(url);
     props.showsList.splice(props.index, 1);
     props.setShowsList(props.showsList);

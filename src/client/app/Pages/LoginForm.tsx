@@ -17,7 +17,7 @@ const LoginForm: React.FC = () => {
   const { login } = userSlice.actions;
 
   useEffect(() => {
-    fetch('/api/users/auth', {
+    fetch('http://api.terrence.io/api/users/auth', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
 
   const loginUser = (event: FormEvent) => {
     event.preventDefault();
-    fetch('/api/users/login', {
+    fetch('http://api.terrence.io/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

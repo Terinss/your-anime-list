@@ -12,7 +12,9 @@ const ProtectedRoute = () => {
   const dispatch = useAppDispatch();
 
   const verifyUser = async () => {
-    const user = await fetch('/api/users/auth').then((res) => res.json());
+    const user = await fetch('http://api.terrence.io/api/users/auth').then(
+      (res) => res.json()
+    );
     dispatch(login(user?.currentUser || null));
     setLoading(false);
   };

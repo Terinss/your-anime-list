@@ -8,7 +8,7 @@ import '../styles/nav.css';
 const Navigation = () => {
   const navigate = useNavigate();
   const logout = () => {
-    fetch('/api/users/logout');
+    fetch('http://api.terrence.io/api/users/logout');
     navigate('/');
   };
 

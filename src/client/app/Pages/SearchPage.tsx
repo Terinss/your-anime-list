@@ -30,7 +30,7 @@ const SeachPage = () => {
   const changePage = (url: string, event: React.SyntheticEvent): void => {
     event.preventDefault();
     console.log(url);
-    fetch(`/api/anime/search/?url=${url}`)
+    fetch(`http://api.terrence.io/api/anime/search/?url=${url}`)
       .then((res) => res.json())
       .then((results) => {
         setSearchResults(results);
