@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   watchingAnime: [
     {
-      dbid: { type: Number, required: true, unique: true },
+      dbid: { type: Number, required: true },
       episodesWatched: { type: Number, default: 0 },
     },
   ],
