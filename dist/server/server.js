@@ -11,7 +11,7 @@ const users_routes_1 = __importDefault(require("./routes/users.routes"));
 const anime_routes_1 = __importDefault(require("./routes/anime.routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const PORT = 1234;
+const PORT = 80;
 const mongoURI = process.env.MONGO_URI;
 mongoose_1.default
     .connect(mongoURI)

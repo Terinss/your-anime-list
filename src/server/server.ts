@@ -13,7 +13,7 @@ import anime from './routes/anime.routes';
 
 dotenv.config();
 const app = express();
-const PORT = 1234;
+const PORT = 80;
 const mongoURI = process.env.MONGO_URI!;
 
 mongoose
