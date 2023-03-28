@@ -14,7 +14,8 @@ import anime from './routes/anime.routes';
 dotenv.config();
 const app = express();
 const PORT = 1234;
-const mongoURI = 'mongodb://localhost:27017/AnimeList';
+const mongoURI = process.env.MONGO_URI!;
+
 mongoose
   .connect(mongoURI)
   .then(() => console.log('Successfully connected to MongoDB!'))
