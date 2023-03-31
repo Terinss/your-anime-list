@@ -132,12 +132,12 @@ const authController = {
                 });
               // Set cookie
               res.cookie('token', token, {
-                httpOnly: true,
+                // httpOnly: true,
                 sameSite: 'strict',
                 secure: true,
               });
               res.cookie('SSID', res.locals.SSID, {
-                httpOnly: true,
+                // httpOnly: true,
                 sameSite: 'strict',
                 secure: true,
               });
@@ -157,12 +157,12 @@ const authController = {
   // Middleware function to logout user by clearing their cookie
   logout: (req: Request, res: Response, next: NextFunction) => {
     res.clearCookie('token', {
-      httpOnly: true,
+      // httpOnly: true,
       sameSite: 'strict',
       secure: true,
     });
     res.clearCookie('SSID', {
-      httpOnly: true,
+      // httpOnly: true,
       sameSite: 'strict',
       secure: true,
     });
