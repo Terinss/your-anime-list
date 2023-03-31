@@ -13,16 +13,28 @@ const ProtectedRoute = () => {
   const dispatch = useAppDispatch();
 
   const verifyUser = async () => {
-    const user = await api.get('/api/users/auth').then((res) => res.data);
-    dispatch(login(user?.currentUser || null));
-    setLoading(false);
+    try {
+      const response = await api.get('/api/users/auth');
+      const user = response.data;
+      dispatch(login(user?.currentUser || null));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     verifyUser();
   }, []);
 
-  return loading ? <Loader /> : !user ? <Navigate to="/" /> : <Outlet />;
+  return loading ? (
+    <Loader />
+  ) : user === null ? (
+    <Navigate to="/" />
+  ) : (
+    <Outlet />
+  );
 };
 
 export default ProtectedRoute;
