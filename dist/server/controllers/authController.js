@@ -8,7 +8,8 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const userModel_1 = require("../models/userModel");
 const authController = {
     signup: (req, res, next) => {
-        const { username, password } = req.body.data;
+        let { username, password } = req.body.data;
+        username = username.trim().toLowerCase();
         // Check if username and password are provided
         if (!username || !password) {
             return next({
