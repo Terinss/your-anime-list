@@ -6,13 +6,11 @@ import { User } from '../models/userModel';
 
 const authController = {
   signup: (req: Request, res: Response, next: NextFunction) => {
-    const { username, password } = req.body as unknown as {
+    const { username, password } = req.body.data as unknown as {
       username: string;
       password: string;
     };
-    console.log(
-      `received request to signup with username: ${username} and password: ${password}`
-    );
+
     // Check if username and password are provided
     if (!username || !password) {
       return next({
@@ -105,6 +103,7 @@ const authController = {
         });
       }
       res.locals.currentUser = username;
+      res.locals.SSID = user._id;
       // Check password
       bcrypt
         .compare(password, user.password)
@@ -132,7 +131,13 @@ const authController = {
               // Set cookie
               res.cookie('token', token, {
                 httpOnly: true,
-                sameSite: true,
+                sameSite: 'strict',
+                secure: true,
+              });
+              res.cookie('SSID', res.locals.SSID, {
+                httpOnly: true,
+                sameSite: 'strict',
+                secure: true,
               });
               return next();
             }
@@ -149,7 +154,16 @@ const authController = {
   },
   // Middleware function to logout user by clearing their cookie
   logout: (req: Request, res: Response, next: NextFunction) => {
-    res.clearCookie('token');
+    res.clearCookie('token', {
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: true,
+    });
+    res.clearCookie('SSID', {
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: true,
+    });
     return next();
   },
 

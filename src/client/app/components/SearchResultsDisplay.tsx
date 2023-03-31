@@ -29,7 +29,7 @@ const SearchResultsDisplay: React.FC<SearchResultsDisplayProps> = ({
           coverImage={anime.coverImage}
           id={anime.id}
           key={`SearchResult${index}`}
-          dbid={`SearchResult${index}`}
+          dbid={anime.id}
         />
       );
     }

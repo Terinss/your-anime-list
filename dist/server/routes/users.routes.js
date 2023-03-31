@@ -8,7 +8,6 @@ const authController_1 = __importDefault(require("../controllers/authController"
 const router = express_1.default.Router();
 // Login route
 router.post('/login', authController_1.default.login, (req, res, next) => {
-    console.log('res.locals.currentUser: ', res.locals.currentUser);
     res.status(200).json({ success: true, currentUser: res.locals.currentUser });
 });
 router.post('/logout', authController_1.default.verify, authController_1.default.logout, (req, res) => {

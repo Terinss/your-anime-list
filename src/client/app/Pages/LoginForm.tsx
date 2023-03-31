@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { userSlice } from '../store/user';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import api from '../components/api/api_instance';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/loginform.css';
 
@@ -17,17 +17,11 @@ const LoginForm: React.FC = () => {
   const { login } = userSlice.actions;
 
   useEffect(() => {
-    fetch('http://api.terrence.io/api/users/auth', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
+    api
+      .get('/api/users/auth')
+      .then((res) => res.data)
       .then(({ success, currentUser }) => {
-        console.log('got data back when logging in: ', success, currentUser);
         if (success) {
-          console.log('dispatching login');
           dispatch(login(currentUser));
           navigate('/home');
         }
@@ -36,16 +30,10 @@ const LoginForm: React.FC = () => {
 
   const loginUser = (event: FormEvent) => {
     event.preventDefault();
-    fetch('http://api.terrence.io/api/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
+    api
+      .post('/api/users/login', JSON.stringify(formData))
+      .then((res) => res.data)
       .then(({ success, currentUser }) => {
-        console.log('got data back when logging in: ', success, currentUser);
         if (success) {
           dispatch(login(currentUser));
           navigate('/home');
@@ -95,7 +83,6 @@ const LoginForm: React.FC = () => {
           data-testid="login-register-button"
           variant="primary"
           onClick={() => {
-            console.log('clicked');
             navigate('/signup');
           }}
         >

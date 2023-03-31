@@ -3,12 +3,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
+import api from './api/api_instance';
 import '../styles/nav.css';
 
 const Navigation = () => {
   const navigate = useNavigate();
   const logout = () => {
-    fetch('http://api.terrence.io/api/users/logout');
+    api.get('/api/users/logout');
     navigate('/');
   };
 

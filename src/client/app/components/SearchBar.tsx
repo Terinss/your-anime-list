@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import api from './api/api_instance';
 import { SearchResults } from '../Pages/SearchPage';
 
 interface SearchBarProps {
@@ -18,8 +19,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
     event.preventDefault();
     setLoading(true);
     const parsedText = formData.replaceAll(' ', '+');
-    fetch(`http://api.terrence.io/api/anime/search/?filter=${parsedText}`)
-      .then((res) => res.json())
+    api
+      .get(`api/anime/search/?filter=${parsedText}`)
+      .then((res) => res.data)
       .then((results) => {
         setLoading(false);
         setSearchResults(results);

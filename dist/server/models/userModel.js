@@ -7,15 +7,18 @@ exports.User = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const userSchema = new Schema({
-    _id: { type: String, default: new mongoose_1.default.Types.ObjectId() },
+    // _id: { type: String, default: new mongoose.Types.ObjectId(), unique: true },
     username: { type: String, required: true },
     password: { type: String, required: true },
-    watchingAnime: [
-        {
-            dbid: { type: Number, required: true },
-            episodesWatched: { type: Number, default: 0 },
-        },
-    ],
+    watchingAnime: {
+        type: [
+            {
+                dbid: { type: Number },
+                episodesWatched: { type: Number, default: 0 },
+            },
+        ],
+        default: [],
+    },
 });
 exports.User = mongoose_1.default.model('User', userSchema);
 //# sourceMappingURL=userModel.js.map

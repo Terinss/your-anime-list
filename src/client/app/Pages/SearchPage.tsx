@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
 import SearchResultsDisplay from '../components/SearchResultsDisplay';
 import Button from 'react-bootstrap/Button';
+import api from '../components/api/api_instance';
 import '../styles/searchpage.css';
 
 export interface Anime {
@@ -29,13 +30,13 @@ const SeachPage = () => {
   const [loading, setLoading] = useState(false);
   const changePage = (url: string, event: React.SyntheticEvent): void => {
     event.preventDefault();
-    console.log(url);
-    fetch(`http://api.terrence.io/api/anime/search/?url=${url}`)
-      .then((res) => res.json())
+    api
+      .get(`/api/anime/search/?url=${url}`)
+      .then((res) => res.data)
       .then((results) => {
         setSearchResults(results);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
 
   return (

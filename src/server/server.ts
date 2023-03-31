@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import cors from 'cors';
 import express, {
   Request,
   Response,
@@ -27,11 +28,12 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
+app.use(cors({ credentials: true, origin: 'https://yal.terrence.io' }));
 
 // Health check
 app.use('/health', (req: Request, res: Response) => {
   res.sendStatus(200);
-} )
+});
 
 // Test router
 app.use('/api/users', users);

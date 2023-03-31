@@ -16,12 +16,10 @@ const animeController = {
     },
     deleteUserAnime: (req, res, next) => {
         const { dbid } = req.query;
-        console.log(dbid);
-        userModel_1.User.findOneAndUpdate({ _id: req.cookies.SSID }, { $pull: { watchingAnime: { dbid: dbid } } }, { new: true }, (err, user) => console.log(user));
+        userModel_1.User.findOneAndUpdate({ _id: req.cookies.SSID }, { $pull: { watchingAnime: { dbid: dbid } } }, { new: true }, (err, user) => user);
     },
     addUserAnime: (req, res, next) => {
         const currentUser = res.locals.currentUser;
-        console.log(currentUser);
         const { dbid } = req.query;
         const url = `https://kitsu.io/api/edge/anime?filter[id]=${dbid}`;
         userModel_1.User.findOneAndUpdate({ username: currentUser }, { $addToSet: { watchingAnime: [{ dbid }] } }, { new: true }, (err, user) => {
@@ -86,7 +84,6 @@ const animeController = {
                         episodesWatched: user.watchingAnime[index].episodesWatched,
                     });
                 });
-                console.log('User shows: ', userShows);
                 res.locals.userShows = userShows;
                 return next();
             });

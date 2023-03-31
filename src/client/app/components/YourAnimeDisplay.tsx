@@ -4,6 +4,7 @@ import YourAnime from './YourAnime';
 import '../styles/youranimedisplay.css';
 import { useNavigate } from 'react-router-dom';
 import { SearchResultType } from './SearchResult';
+import api from './api/api_instance';
 
 export interface UserAnime extends SearchResultType {
   episodesWatched: number;
@@ -15,14 +16,13 @@ const YourAnimeDisplay = () => {
   const yourAnimeList: JSX.Element[] = [];
 
   useEffect(() => {
-    const url = 'http://api.terrence.io/api/anime/yourshows';
-    fetch(url)
-      .then((res) => res.json())
+    const url = '/api/anime/yourshows';
+    api
+      .get(url)
+      .then((res) => res.data)
       .then((data) => {
-        console.log('data:' + data);
         if (data.length !== showsList.length) {
           setShowsList(data);
-          console.log(data);
         }
       });
   }, []);

@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../hooks';
 import { useAppDispatch } from '../hooks';
 import { userSlice } from '../store/user';
+import api from './api/api_instance';
 import Loader from './Loader';
 
 const ProtectedRoute = () => {
@@ -12,9 +13,7 @@ const ProtectedRoute = () => {
   const dispatch = useAppDispatch();
 
   const verifyUser = async () => {
-    const user = await fetch('http://api.terrence.io/api/users/auth').then(
-      (res) => res.json()
-    );
+    const user = await api.get('/api/users/auth').then((res) => res.data);
     dispatch(login(user?.currentUser || null));
     setLoading(false);
   };

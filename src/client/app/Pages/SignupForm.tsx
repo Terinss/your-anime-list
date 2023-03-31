@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import api from '../components/api/api_instance';
 import '../styles/signupform.css';
 
 const SignupForm: React.FC = () => {
@@ -12,19 +13,16 @@ const SignupForm: React.FC = () => {
   const createUser = (event: React.SyntheticEvent) => {
     try {
       event.preventDefault();
-      fetch('http://api.terrence.io/api/users/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => {
-          if (!res.ok) {
+      api
+        .post('/api/users/signup', {
+          body: JSON.stringify(formData),
+        })
+        .then(({ data }) => {
+          if (!data.ok) {
             throw new Error('Unable to create new user, invalid input');
           } else navigate('/');
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     } catch (error) {
       console.error('!', error);
     }

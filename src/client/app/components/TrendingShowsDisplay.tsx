@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import type { Anime } from '../Pages/SearchPage';
+import api from './api/api_instance';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/trendingshowsdisplay.css';
 
@@ -8,8 +9,9 @@ const TrendingShowsDisplay = () => {
   const [anime, setAnime] = useState<Anime[]>([]);
 
   useEffect(() => {
-    fetch('http://api.terrence.io/api/anime/trending')
-      .then((res) => res.json())
+    api
+      .get('/api/anime/trending')
+      .then((res) => res.data)
       .then((data) => {
         setAnime(data);
       });
@@ -17,7 +19,6 @@ const TrendingShowsDisplay = () => {
 
   const shows: JSX.Element[] = [];
 
-  console.log('Trending Anime: ', anime);
   if (Array.isArray(anime)) {
     anime.forEach((anime, index) => {
       shows.push(

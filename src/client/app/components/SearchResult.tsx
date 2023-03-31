@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { useState } from 'react';
 import type { Anime } from '../Pages/SearchPage';
+import api from './api/api_instance';
 import '../styles/searchresult.css';
 
 export interface SearchResultType extends Anime {
@@ -19,10 +20,10 @@ const SearchResult: React.FC<SearchResultType> = (props) => {
   };
 
   const addAnimeToList = () => {
-    const url = `http://api.terrence.io/api/anime/adduseranime?dbid=${props.dbid}`;
+    const url = `/api/anime/adduseranime?dbid=${props.dbid}`;
     setAlertStatus(true);
     setTimeout(setAlertStatus, 1000, false);
-    fetch(url, { method: 'POST' });
+    api.post(url);
   };
 
   return (

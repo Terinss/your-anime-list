@@ -8,8 +8,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const userModel_1 = require("../models/userModel");
 const authController = {
     signup: (req, res, next) => {
-        const { username, password } = req.body;
-        console.log(`received request to signup with username: ${username} and password: ${password}`);
+        const { username, password } = req.body.data;
         // Check if username and password are provided
         if (!username || !password) {
             return next({
@@ -100,6 +99,7 @@ const authController = {
                 });
             }
             res.locals.currentUser = username;
+            res.locals.SSID = user._id;
             // Check password
             bcrypt_1.default
                 .compare(password, user.password)
@@ -123,7 +123,13 @@ const authController = {
                     // Set cookie
                     res.cookie('token', token, {
                         httpOnly: true,
-                        sameSite: true,
+                        sameSite: 'strict',
+                        secure: true,
+                    });
+                    res.cookie('SSID', res.locals.SSID, {
+                        httpOnly: true,
+                        sameSite: 'strict',
+                        secure: true,
                     });
                     return next();
                 });
@@ -139,7 +145,16 @@ const authController = {
     },
     // Middleware function to logout user by clearing their cookie
     logout: (req, res, next) => {
-        res.clearCookie('token');
+        res.clearCookie('token', {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: true,
+        });
+        res.clearCookie('SSID', {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: true,
+        });
         return next();
     },
     // Middleware function to verify user by checking if they have a valid token

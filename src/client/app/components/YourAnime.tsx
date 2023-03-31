@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import type { UserAnime } from './YourAnimeDisplay';
+import api from './api/api_instance';
 import '../styles/youranime.css';
 
 interface YourAnimeProps {
@@ -17,15 +18,13 @@ interface YourAnimeProps {
 
 const YourAnime: React.FC<YourAnimeProps> = (props) => {
   const saveEpisodes = () => {
-    const url = `http://api.terrence.io/api/anime/update?dbid=${props.dbid}&episodes=${props.episodesWatched}`;
-    fetch(url, {
-      method: 'POST',
-    });
+    const url = `/api/anime/update?dbid=${props.dbid}&episodes=${props.episodesWatched}`;
+    api.post(url);
   };
 
   const deleteAnime = () => {
-    const url = `http://api.terrence.io/api/anime/deleteuseranime?dbid=${props.dbid}`;
-    fetch(url);
+    const url = `/api/anime/deleteuseranime?dbid=${props.dbid}`;
+    api.get(url);
     props.showsList.splice(props.index, 1);
     props.setShowsList(props.showsList);
   };
