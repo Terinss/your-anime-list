@@ -1,10 +1,13 @@
-name: yal-ci
+name: yal-server-ci
 
 on:
   workflow_dispatch:
   push:
     branches:
       - "main"
+    paths:
+      - "dist/server/**"
+      - ".github/workflows/yal-server-ci.yml"
 
 jobs:
   docker:
@@ -33,11 +36,3 @@ jobs:
           file: ./dist/server/Dockerfile
           push: true
           tags: terinss/yal-backend:latest
-      -
-        name: Build and push proxy code
-        uses: docker/build-push-action@v4
-        with:
-          context: ./dist/client
-          file: ./dist/client/Dockerfile
-          push: true
-          tags: terinss/yal-nginx:latest
