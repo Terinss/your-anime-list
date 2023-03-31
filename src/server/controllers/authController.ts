@@ -6,7 +6,7 @@ import { User } from '../models/userModel';
 
 const authController = {
   signup: (req: Request, res: Response, next: NextFunction) => {
-    let { username, password } = req.body.data as unknown as {
+    let { username, password } = req.body as unknown as {
       username: string;
       password: string;
     };
@@ -84,7 +84,8 @@ const authController = {
 
   // Login Middleware
   login: (req: Request, res: Response, next: NextFunction) => {
-    const { username, password } = req.body;
+    let { username, password } = req.body;
+    username = username.trim().toLowerCase();
     // Check if username and password are provided
     if (!username || !password) {
       return next({

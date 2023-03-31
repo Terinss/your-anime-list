@@ -14,9 +14,7 @@ const SignupForm: React.FC = () => {
     try {
       event.preventDefault();
       api
-        .post('/api/users/signup', {
-          body: JSON.stringify(formData),
-        })
+        .post('/api/users/signup', JSON.stringify(formData))
         .then(({ data }) => {
           if (!data.ok) {
             throw new Error('Unable to create new user, invalid input');
