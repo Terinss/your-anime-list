@@ -9,7 +9,7 @@ import '../styles/nav.css';
 const Navigation = () => {
   const navigate = useNavigate();
   const logout = async () => {
-    api.post('/api/users/logout');
+    await api.post('/api/users/logout');
     window.location.reload();
   };
 
