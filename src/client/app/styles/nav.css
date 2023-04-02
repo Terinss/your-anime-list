@@ -1,27 +1,42 @@
-Nav {
+.nav {
   background-color: rgba(245, 245, 245, 0.1);
   height: 100px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
-  display: flex;
-  justify-content: space-between;
 }
 
-.nav-logo{
+.navbar-toggler {
+  border-color: wheat;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width='30' height='30' fill='wheat'%3e%3cpath stroke-linecap='round' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.nav-logo {
   font-size: 2em;
   color: wheat;
 }
 
 .nav-link {
+  margin: 0px;
+  padding: 0px;
   font-size: 1.5em;
   color: wheat;
 }
 
-.nav-buttons{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 20%;
+@media screen and (min-width: 992px) {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+  }
 }

@@ -1,9 +1,10 @@
 .your-anime-display {
+  padding: 10px;
 }
 
 .your-anime-display-items {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 10px;
 }
 
@@ -12,4 +13,10 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .your-anime-display-items {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
 }

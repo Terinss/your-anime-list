@@ -19,13 +19,14 @@ const Navigation = () => {
         <Navbar.Brand href="/home" className="nav-logo">
           YourAnimeList
         </Navbar.Brand>
-        <div className="nav-buttons">
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate('/home')}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate('/search')}>Search</Nav.Link>
             <Nav.Link onClick={logout}>Logout</Nav.Link>
           </Nav>
-        </div>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

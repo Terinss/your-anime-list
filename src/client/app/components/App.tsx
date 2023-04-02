@@ -13,16 +13,18 @@ const App = () => {
   return (
     <div>
       <Navigation />
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/signup" element={<SignupForm />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<SeachPage />} />
-        </Route>
-        <Route path="*" element={<h1>404: Not Found</h1>} />
-      </Routes>
+      <div className="content-container">
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/search" element={<SeachPage />} />
+          </Route>
+          <Route path="*" element={<h1>404: Not Found</h1>} />
+        </Routes>
+      </div>
     </div>
   );
 };

@@ -15,3 +15,8 @@ html {
   background-color: #202124;
   color: #bdc1c6;
 }
+
+.content-container {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
